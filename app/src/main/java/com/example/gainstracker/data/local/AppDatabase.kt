@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.gainstracker.data.local.dao.ExerciseDao
 import com.example.gainstracker.data.local.dao.WorkoutDao
 import com.example.gainstracker.data.local.entities.BodyMeasurementEntity
 import com.example.gainstracker.data.local.entities.ExerciseEntity
@@ -29,6 +30,7 @@ import com.example.gainstracker.data.local.entities.WorkoutSetEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun workoutDao(): WorkoutDao
+    abstract fun exerciseDao(): ExerciseDao
 
     companion object {
         @Volatile

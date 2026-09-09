@@ -48,8 +48,9 @@ interface WorkoutDao {
     // ==========================================
     // 2. EJERCICIOS (BibliotecaEjercicios)
     // ==========================================
-    @Query("SELECT * FROM exercises WHERE userId IS NULL OR userId = :userId ORDER BY name ASC")
-    fun getExercisesForUser(userId: Long): Flow<List<ExerciseEntity>>
+    // NOTA: Se elimina 'userId' ya que ExerciseEntity es global en este modelo
+    @Query("SELECT * FROM exercises ORDER BY name ASC")
+    fun getExercisesForUser(): Flow<List<ExerciseEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExercise(exercise: ExerciseEntity): Long
@@ -58,8 +59,9 @@ interface WorkoutDao {
     // ==========================================
     // 3. RUTINAS (PlantillaRutina)
     // ==========================================
-    @Query("SELECT * FROM routines WHERE userId = :userId ORDER BY createdAt DESC")
-    fun getRoutinesForUser(userId: Long): Flow<List<RoutineEntity>>
+    // NOTA: Se elimina 'userId' ya que RoutineEntity no tiene esa columna
+    @Query("SELECT * FROM routines ORDER BY id DESC")
+    fun getRoutinesForUser(): Flow<List<RoutineEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRoutine(routine: RoutineEntity): Long
@@ -67,7 +69,8 @@ interface WorkoutDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRoutineExerciseCrossRef(crossRef: RoutineExerciseCrossRef)
 
-    @Query("SELECT * FROM routine_exercise_cross_ref WHERE routineId = :routineId ORDER BY orderInRoutine ASC")
+    // CORREGIDO: Se cambia 'orderInRoutine' por 'orderIndex'
+    @Query("SELECT * FROM routine_exercise_cross_ref WHERE routineId = :routineId ORDER BY orderIndex ASC")
     suspend fun getRoutineExercises(routineId: Long): List<RoutineExerciseCrossRef>
 
 
