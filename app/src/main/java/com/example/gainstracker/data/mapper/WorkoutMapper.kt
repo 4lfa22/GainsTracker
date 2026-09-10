@@ -55,7 +55,7 @@ fun Routine.toEntity(): RoutineEntity {
 // ==========================================
 // WORKOUT SESSION MAPPERS
 // ==========================================
-fun WorkoutSessionEntity.toDomain(routineName: String = "Entrenamiento"): WorkoutSession {
+fun WorkoutSessionEntity.toDomain(): WorkoutSession {
     return WorkoutSession(
         id = id,
         userId = userId,

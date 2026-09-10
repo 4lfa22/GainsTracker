@@ -7,9 +7,10 @@ import com.example.gainstracker.data.local.entities.ExerciseEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import javax.inject.Provider
 
-class DatabaseCallback(
+class DatabaseCallback @Inject constructor(
     private val exerciseDaoProvider: Provider<ExerciseDao>
 ) : RoomDatabase.Callback() {
 
