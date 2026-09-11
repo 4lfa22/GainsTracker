@@ -80,9 +80,14 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // Testing
+    // DataStore Preferences
+    implementation(libs.androidx.datastore.preferences) // o "androidx.datastore:datastore-preferences:1.1.1"
+
+    // Testing Unitario
+    testImplementation(libs.junit)
     testImplementation("io.mockk:mockk:1.13.10")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    testImplementation("app.cash.turbine:turbine:1.1.0") // Para testear Flows de forma limpia
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
